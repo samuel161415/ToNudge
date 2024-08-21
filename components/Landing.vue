@@ -28,11 +28,12 @@
       <button
         class="bg-white text-btn_colors py-3 px-4 rounded-lg flex justify-center items-center mt-8 mb-16 shadow-custom-blue transform transition-all duration-300 ease-in-out hover:scale-110"
       >
-        <span class="font-semibold mr-2 ">Install on</span>
+        <span class="font-semibold mr-2">Install on</span>
         <img class=" " :src="img1" />
       </button>
       <!-- <img :src="temp_img" class="my-4" /> -->
       <VideoPlayer />
+     
       <div class="flex flex-col w-full my-6 mt-16">
         <span
           class="text-center text-lg font-light text-secondary_txt_color my-4"
@@ -96,3 +97,7 @@ const icons = [
   { name: "Icon 15", src: icon15 },
 ];
 </script>
+
+<style scoped>
+
+</style>

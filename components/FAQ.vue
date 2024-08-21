@@ -18,10 +18,10 @@
           :key="index"
           @click="toggleExpand(index)"
           :class="[
-            'cursor-pointer  py-4 my-3 w-full',
-            index % 2 === 0
-              ? 'border-b border-gray-300'
-              : 'border-b border-black',
+            'cursor-pointer border-b  py-4 my-3 w-full',
+            expandedIndex === index
+              ? 'border-black '
+              : 'border-gray-300',
           ]"
         >
           <!-- Title and Icon -->
@@ -78,7 +78,6 @@ const items = ref([
     title: "What languages does ToNudge support?",
     description: "Description for item 4",
   },
-  // Add more items as needed
 ]);
 
 const toggleExpand = (index: number) => {

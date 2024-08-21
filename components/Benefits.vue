@@ -27,10 +27,11 @@
             :key="card.name"
             class="w-full flex items-start p-4"
             :class="
-              index === 0
-                ? 'border-t border-l border-r border-blue-500 rounded-t-xl bg-gradient-to-b from-background_color/60  to-white '
+              selectedCardIndex === index
+                ? 'border-t border-l border-r border-blue-500 rounded-t-xl bg-gradient-to-b from-background_color/60 to-white'
                 : 'py-6'
             "
+            @click="selectCard(index)"
           >
             <img :src="card.src" :alt="card.name" class="mr-4" />
             <div>
@@ -41,6 +42,7 @@
             </div>
           </div>
         </section>
+
         <section
           class="py-14 rounded-xl bg-card_list_bg flex flex-col items-start col-span-4 border"
         >
@@ -69,17 +71,17 @@
             </div>
             <ul class="z-10">
               <li
-                v-for="(item, index) in list_data"
+                v-for="(item, index) in filteredListData"
                 :key="item.name"
-                @click="selectedIndex = index"
-                class="my-2 justify-between items-center p-2 rounded-lg text-xs border bg-white flex transorm-all transition-transform hover:scale-x-110 ease-in-out duration-300 cursor-pointer"
+                @click="selectListItem(index)"
+                class="my-2 justify-between items-center p-2 rounded-lg text-xs border bg-white flex transform transition-transform hover:scale-x-110 ease-in-out duration-300 cursor-pointer"
               >
                 <div class="my-b mr-2 flex items-center">
                   <label class="flex items-center space-x-2">
                     <input
                       type="radio"
                       :value="index"
-                      v-model="selectedIndex"
+                      v-model="selectedListIndex"
                       class="hidden peer"
                     />
                     <div
@@ -88,8 +90,8 @@
                       <div
                         class="w-3 h-3 rounded"
                         :class="{
-                          'bg-blue-500': selectedIndex === index,
-                          'bg-transparent': selectedIndex !== index,
+                          'bg-blue-500': selectedListIndex === index,
+                          'bg-transparent': selectedListIndex !== index,
                         }"
                       ></div>
                     </div>
@@ -134,52 +136,96 @@ import cl3 from "assets/icons/cl3.png";
 import check from "assets/icons/check.png";
 import arrow from "assets/icons/arrow.png";
 import clbg from "assets/images/clbg.png";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const card_list = ref([
   {
+    key: "track_emails", // Unique key
     name: "cl1",
-    title: "Track Important Emails",
     src: cl1,
+    title: "Track Important Emails",
     desc: "Automatically compile the important sender based on your level of matterness",
   },
   {
+    key: "monitor_followups", // Unique key
     name: "cl2",
-    title: "Monitor Follow-Ups",
     src: cl2,
+    title: "Monitor Follow-Ups",
     desc: "Smart curations by our systems to inform you which email should be followed-up",
   },
   {
+    key: "send_followups", // Unique key
     name: "cl3",
-    title: "Sent Follow-Ups Effortlesly",
     src: cl3,
-    desc: "Sent follow-ups quickly by using our dedicated template ready",
+    title: "Send Follow-Ups Effortlessly",
+    desc: "Send follow-ups quickly by using our dedicated template ready",
   },
 ]);
 
+// Define list_data with corresponding keys
 const list_data = ref([
   {
+    key: "track_emails", // Matching key
     name: "Any Carrol",
-    subject: "Meeting Appoinment",
-    answered: "Answered 6d a go",
+    subject: "Meeting Appointment",
+    answered: "Answered 6d ago",
   },
   {
+    key: "track_emails", // Matching key
     name: "Artem Sazonov",
-    subject: "Meeting Appoinment",
-    answered: "Answered 7d a go",
+    subject: "Meeting Appointment",
+    answered: "Answered 7d ago",
   },
   {
+    key: "monitor_followups", // Matching key
     name: "Victor Pacheco",
-    subject: "Meeting Appoinment",
-    answered: "Answered Last Week",
+    subject: "Follow-Up Reminder",
+    answered: "Pending",
   },
   {
+    key: "monitor_followups", // Matching key
     name: "Jaroslav Brabec",
-    subject: "Meeting Appoinment",
-    answered: "Answered Last Week",
+    subject: "Client Follow-Up",
+    answered: "Pending",
+  },
+  {
+    key: "send_followups", // Matching key
+    name: "John Doe",
+    subject: "Follow-Up Email Sent",
+    answered: "Answered Yesterday",
+  },
+  {
+    key: "send_followups", // Matching key
+    name: "Jane Smith",
+    subject: "Follow-Up Email Sent",
+    answered: "Answered 2d ago",
   },
 ]);
-const selectedIndex = ref<number | null>(null);
+
+const selectedCardIndex = ref<number | null>(0); // Default to first card
+const selectedListIndex = ref<number | null>(null); // To track selected item in the list
+
+// Explicitly define the type of filteredListData to avoid type errors
+const filteredListData = ref<typeof list_data.value>([]);
+
+// Method to select a card and update the displayed content
+const selectCard = (index: number) => {
+  selectedCardIndex.value = index;
+  selectedListIndex.value = null; // Reset list selection when changing card
+  filteredListData.value = list_data.value.filter(
+    (item) => item.key === card_list.value[index].key
+  );
+};
+
+// Method to select a list item without affecting the selected card
+const selectListItem = (index: number) => {
+  selectedListIndex.value = index;
+};
+
+// Initialize default selection when the component is mounted
+onMounted(() => {
+  selectCard(0); // Select the first card by default
+});
 </script>
 
 <style scoped>
