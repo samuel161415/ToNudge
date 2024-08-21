@@ -1,6 +1,6 @@
 <template>
   <header class="absolute top-0 left-0 w-full z-50">
-    <div class="flex justify-between items-center p-4 max-w-7xl mx-auto">
+    <div class="flex justify-between items-center p-6 max-w-7xl mx-auto">
       <!-- Logo/Title -->
       <div class="text-2xl font-[600]">ToNudge</div>
 
@@ -96,3 +96,10 @@ const toggleDropdown = () => {
   dropdownOpen.value = !dropdownOpen.value;
 };
 </script>
+
+<style scoped>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
+
