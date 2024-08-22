@@ -1,7 +1,7 @@
 
  <template>
-  <Landing />
   <Header />
+  <Landing />
   <HowItWorks />
   <Benefits />
   <Pricing />
