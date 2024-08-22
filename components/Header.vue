@@ -23,7 +23,7 @@
             <a href="#how-it-works" class="hover:text-primary">How it Works</a>
           </li>
           <li><a href="#benefits" class="hover:text-primary">Benefits</a></li>
-          <li><a href="#pricing" class="hover:text-primary">Pricing</a></li>
+          <!-- <li><a href="#pricing" class="hover:text-primary">Pricing</a></li> -->
           <li><a href="#faq" class="hover:text-primary">FAQ</a></li>
         </ul>
       </nav>
@@ -65,11 +65,11 @@
             >Benefits</a
           >
         </li>
-        <li class="py-3">
+        <!-- <li class="py-3">
           <a href="#pricing" class="hover:text-primary" @click="toggleDropdown"
             >Pricing</a
           >
-        </li>
+        </li> -->
         <li class="py-3">
           <a href="#faq" class="hover:text-primary" @click="toggleDropdown"
             >FAQ</a
