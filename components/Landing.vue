@@ -13,7 +13,7 @@
     "
   >
     <div
-      class="w-full z-10 h-full flex flex-col justify-center items-center pt-[100px] pb-10 max-w-7xl p-3"
+      class="w-full h-full flex flex-col justify-center items-center pt-[100px] pb-10 max-w-7xl p-3"
     >
       <h2
         class="text-2xl font-[400] text-blue-400 text-center leading-[34px] mt-6 mb-2"
@@ -26,14 +26,23 @@
         Make sure your important emails get answered
       </h1>
       <button
-        class="bg-white text-btn_colors py-3 px-4 rounded-lg flex justify-center items-center mt-8 mb-16 shadow-custom-blue transform transition-all duration-300 ease-in-out hover:scale-110"
+        class="bg-white text-btn_colors py-3 px-4 rounded-lg flex justify-center items-center mt-8 mb-16  shadow-custom-blue animate-glow-slow transform transition-all duration-300 ease-in-out hover:scale-110"
+        v-if="!showContactUs"
       >
         <span class="font-semibold mr-2">Install on</span>
         <img class=" " :src="img1" />
       </button>
+      <a
+        href="mailto:contact@tonudge.com"
+        class="bg-white text-btn_colors py-3 px-4 rounded-lg flex justify-center items-center mt-8 mb-16  shadow-custom-blue animate-glow-slow transform transition-all duration-300 ease-in-out hover:scale-110"
+        v-if="showContactUs"
+      >
+      <span class="font-semibold mr-2">Contact Us</span>
+      <img class=" " :src="img1" />
+      </a>
       <!-- <img :src="temp_img" class="my-4" /> -->
       <VideoPlayer />
-     
+
       <div class="flex flex-col w-full my-6 mt-16">
         <span
           class="text-center text-lg font-light text-secondary_txt_color my-4"
@@ -53,7 +62,7 @@
       </div>
     </div>
     <div
-      class="absolute z-0 top-0 left-0 h-3/5 w-full bg-repeat bg-hero-pattern bg-contain"
+      class="absolute z-[-5] top-0 left-0 h-3/5 w-full bg-repeat bg-hero-pattern bg-contain"
     ></div>
   </section>
 </template>
@@ -79,6 +88,8 @@ import icon14 from "assets/icons/terminal.png";
 import icon15 from "assets/icons/ready.png";
 import VideoPlayer from "./landingComponents/VideoPlayer.vue";
 
+const showContactUs = ref(true);
+
 const icons = [
   { name: "Icon 1", src: icon1 },
   { name: "Icon 2", src: icon2 },
@@ -98,6 +109,4 @@ const icons = [
 ];
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

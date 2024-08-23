@@ -3,9 +3,7 @@
     id="benefits"
     class="w-full bg-white py-10 flex items-center justify-center"
   >
-    <div
-      class="flex flex-col justify-center items-center md:items-start w-full max-w-7xl p-3"
-    >
+    <div class="flex flex-col justify-center items-center w-full max-w-7xl p-3">
       <p
         class="px-4 py-2 rounded-full text-sm font-semibold bg-[#F7F7F8] text-btn_colors text-center"
       >
@@ -13,11 +11,16 @@
       </p>
 
       <h1
-        class="text-primary_txt_color font-sans font-semibold text-4xl md:text-6xl md:leading-[72px] text-center md:text-start w-full md:w-2/3 my-4"
+        class="text-primary_txt_color font-sans font-semibold text-4xl md:text-6xl md:leading-[72px] text-center w-full md:w-2/3 my-4"
       >
         Never Miss Anything <br />
         in Your Inbox
       </h1>
+      <p class="text-center font-[400] text-tertiary_txt_color md:w-2/3">
+        Quick action on important emails can lead to faster problem-solving and
+        decision-making. Making efficiently handling emails can free up time for
+        other tasks.
+      </p>
       <div
         class="w-full grid grid-cols-1 md:grid-cols-7 my-10 gap-y-20 md:gap-x-20"
       >
