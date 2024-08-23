@@ -10,6 +10,7 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
 useHead({
   title: 'ToNudge | Boost Your Productivity with Intelligent Email Management',
   meta: [
