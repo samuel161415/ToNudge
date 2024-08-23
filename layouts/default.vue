@@ -2,7 +2,7 @@
     <div class="min-h-screen  relative">
       <Header />
       
-      <main class=" border">
+      <main class=" ">
         <slot />
       </main>
   

@@ -16,17 +16,17 @@
       class="w-full h-full flex flex-col justify-center items-center pt-[100px] pb-10 max-w-7xl p-3"
     >
       <h2
-        class="text-2xl font-[400] text-blue-400 text-center leading-[34px] mt-6 mb-2"
+        class="text-2xl font-[400] text-blue-400 text-center leading-[34px] mt-6 mb-2 animate-fade-in"
       >
         Optimize your Outlook
       </h2>
       <h1
-        class="text-primary_txt_color font-sans font-semibold text-5xl md:text-6xl leading:[32px] md:leading-[72px] text-center md:w-2/3"
+        class="opacity-0 text-primary_txt_color font-sans font-semibold text-5xl md:text-6xl  md:leading-[72px] text-center md:w-2/3 animate-fade-in-delay"
       >
         Make sure your important emails get answered
       </h1>
       <button
-        class="bg-white text-btn_colors py-3 px-4 rounded-lg flex justify-center items-center mt-8 mb-16  shadow-custom-blue animate-glow-slow transform transition-all duration-300 ease-in-out hover:scale-110"
+        class="bg-white text-btn_colors py-3 px-4 rounded-lg flex justify-center items-center mt-8 mb-16 shadow-custom-blue animate-glow-slow transform transition-all duration-300 ease-in-out hover:scale-110 "
         v-if="!showContactUs"
       >
         <span class="font-semibold mr-2">Install on</span>
@@ -34,11 +34,11 @@
       </button>
       <a
         href="mailto:contact@tonudge.com"
-        class="bg-white text-btn_colors py-3 px-4 rounded-lg flex justify-center items-center mt-8 mb-16  shadow-custom-blue animate-glow-slow transform transition-all duration-300 ease-in-out hover:scale-110"
+        class="bg-white text-btn_colors py-3 px-4 rounded-lg flex justify-center items-center mt-8 mb-16 shadow-custom-blue animate-glow-slow transform transition-all duration-300 ease-in-out hover:scale-110"
         v-if="showContactUs"
       >
-      <span class="font-semibold mr-2">Contact Us</span>
-      <img class=" " :src="img1" />
+        <span class="font-semibold mr-2">Contact Us</span>
+        <img class=" " :src="img1" />
       </a>
       <!-- <img :src="temp_img" class="my-4" /> -->
       <VideoPlayer />
@@ -51,11 +51,13 @@
         <section
           class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-8 items-place-center justify-center my-4"
         >
-          <div
-            class="flex items-center justify-center"
-            v-for="icon in icons"
-            :key="icon.name"
-          >
+        <div
+        class="opacity-0 flex items-center justify-center"
+        v-for="(icon, index) in icons"
+        :key="icon.name"
+        :ref="(el) => (iconRefs[index] = el as HTMLElement)"
+        :class="{ 'animate-slide-in-left': inView[index] }"
+      >
             <img :src="icon.src" :alt="icon.name" />
           </div>
         </section>
@@ -107,6 +109,29 @@ const icons = [
   { name: "Icon 14", src: icon14 },
   { name: "Icon 15", src: icon15 },
 ];
+
+
+const iconRefs = ref<(Element | null)[]>([]); // Changed to Element to accommodate Vue's ref types
+const inView = ref<boolean[]>([]); // Boolean array to track if each icon is in view
+
+onMounted(() => {
+  const observerOptions = {
+    threshold: 0.1, // Trigger when 10% of the icon is in view
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const index = iconRefs.value.findIndex((el) => el === entry.target);
+      if (entry.isIntersecting && index !== -1) {
+        inView.value[index] = true; // Set inView to true when the icon is in viewport
+      }
+    });
+  }, observerOptions);
+
+  iconRefs.value.forEach((icon) => {
+    if (icon) observer.observe(icon);
+  });
+});
 </script>
 
 <style scoped></style>
