@@ -9,7 +9,7 @@
       <h1
         class="text-primary_txt_color font-sans font-semibold text-5xl md:text-6xl md:leading-[72px] text-center my-4"
       >
-        Frequently Asked Questions
+        Frequently Ask Questions
       </h1>
 
       <div class="md:w-4/5">
@@ -18,15 +18,17 @@
           :key="index"
           @click="toggleExpand(index)"
           :class="[
-            'cursor-pointer border-b py-4 my-3 w-full transition-all duration-500 overflow-hidden',
-            expandedIndex === index ? 'border-black' : 'border-gray-300',
+            'cursor-pointer border-b  py-4 my-3 w-full',
+            expandedIndex === index
+              ? 'border-black '
+              : 'border-gray-300',
           ]"
         >
           <!-- Title and Icon -->
           <div class="w-full flex justify-between items-center">
             <div class="flex-1 mr-2">
               <h3
-                class="text-xl font-[400] transition-colors duration-500"
+                class="text-xl font-[400]"
                 :class="
                   expandedIndex === index
                     ? 'text-blue-500'
@@ -45,11 +47,9 @@
           </div>
 
           <!-- Expanded Description -->
-          <transition name="expand" mode="out-in">
-            <div v-if="expandedIndex === index" class="py-4 w-full">
-              <p class="text-tertiary_txt_color">{{ item.description }}</p>
-            </div>
-          </transition>
+          <div v-if="expandedIndex === index" class="py-4 w-full">
+            <p class="text-tertiary_txt_color">{{ item.description }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -84,23 +84,3 @@ const toggleExpand = (index: number) => {
   expandedIndex.value = expandedIndex.value === index ? null : index;
 };
 </script>
-
-<style scoped>
-.expand-enter-active,
-.expand-leave-active {
-  transition: max-height 0.3s ease, opacity 0.3s ease;
-}
-
-.expand-enter {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-}
-
-.expand-enter-to,
-.expand-leave {
-  max-height: 500px; /* Adjust this to a reasonable height that covers most content */
-  opacity: 1;
-  overflow: hidden;
-}
-</style>

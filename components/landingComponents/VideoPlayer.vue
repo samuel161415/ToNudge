@@ -1,10 +1,9 @@
 <template>
   <div class="relative w-full h-full">
-
     <div
       v-if="!isPlaying"
       @click="openModal"
-      class="relative max-h-[620px] cursor-pointer rounded-xl overflow-hidden"
+      class="relative max-h-[620px] cursor-pointer rounded-xl overflow-hidden md:pr-[100px] animate-slide-in-left"
     >
       <img
         :src="preview"
@@ -24,6 +23,12 @@
           </div>
         </div>
       </div>
+      <div
+        class="absolute right-0 top-1/2 transform -translate-y-1/2  h-2/3 "
+        
+      >
+        <img :src="sidePreview" alt="sidePreview" class="w-full h-full object-cover"/>
+      </div>
     </div>
 
     <div
@@ -32,11 +37,11 @@
       @click.self="closeModal"
     >
       <div
-        class="relative w-full  border border-gray-500 rounded-xl flex justify-center items-center max-w-7xl p-4"
+        class="relative w-full border border-gray-500 rounded-xl flex justify-center items-center max-w-7xl p-4"
       >
         <button
           @click="closeModal"
-          class="absolute top-[-5px] transform transition-all  hover:text-red-500 duration-300 ease-in-out right-2 text-white text-3xl z-50"
+          class="absolute top-[-5px] transform transition-all hover:text-red-500 duration-300 ease-in-out right-2 text-white text-3xl z-50"
         >
           &times;
         </button>
@@ -56,9 +61,10 @@
 <script setup lang="ts">
 import { ref, nextTick } from "vue";
 import captionImage from "assets/images/caption.png";
-import preview from "assets/images/preview.png"
+import preview from "assets/images/preview.png";
 import videoSrc from "assets/videos/landing_video.mp4";
 import playIcons from "assets/icons/playIcon.png";
+import sidePreview from "assets/images/sidePreview.png";
 
 const isPlaying = ref(false);
 const videoPlayer = ref<HTMLVideoElement | null>(null);

@@ -16,12 +16,12 @@
       class="w-full h-full flex flex-col justify-center items-center pt-[100px] pb-10 max-w-7xl p-3"
     >
       <h2
-        class="text-2xl font-[400] text-blue-400 text-center leading-[34px] mt-6 mb-2 animate-fade-in"
+        class="opacity-0 text-2xl font-[400] text-blue-400 text-center leading-[34px] mt-6 mb-2 animate-slide-in-left"
       >
         Optimize your Outlook
       </h2>
       <h1
-        class="opacity-0 text-primary_txt_color font-sans font-semibold text-5xl md:text-6xl  md:leading-[72px] text-center md:w-2/3 animate-fade-in-delay"
+        class="opacity-0 text-primary_txt_color font-sans font-semibold text-5xl md:text-6xl  md:leading-[72px] text-center md:w-2/3 animate-slide-in-left"
       >
         Make sure your important emails get answered
       </h1>
@@ -34,7 +34,7 @@
       </button>
       <a
         href="mailto:contact@tonudge.com"
-        class="bg-white text-btn_colors py-3 px-4 rounded-lg flex justify-center items-center mt-8 mb-16 shadow-custom-blue animate-glow-slow transform transition-all duration-300 ease-in-out hover:scale-110"
+        class="bg-white text-btn_colors py-3 px-4 rounded-lg flex justify-center items-center mt-8 mb-16 shadow-custom-blue animate-glow-slow animate-slide-in-left transform transition-all duration-300 ease-in-out hover:scale-110"
         v-if="showContactUs"
       >
         <span class="font-semibold mr-2">Contact Us</span>

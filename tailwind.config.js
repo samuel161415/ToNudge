@@ -30,7 +30,7 @@ export default {
           },
         },
         fadeIn: {
-          "0%": { opacity: 0, transform: "translateY(20px)" },
+          "0%": { opacity: 0, transform: "translateY(30px)" },
           "100%": { opacity: 1, transform: "translateY(0)" },
         },
         slideInLeft: {
@@ -43,7 +43,7 @@ export default {
         },
       },
       animation: {
-        "glow-slow": "glow 3s ease-in-out infinite",
+        "glow-slow": "glow 2s ease-in-out infinite",
         "fade-in": "fadeIn 1s ease-out forwards",
         'fade-in-delay': 'fadeIn 2s ease-out forwards 0.5s',
         "slide-in-left": "slideInLeft 1s ease-out forwards",
