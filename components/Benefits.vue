@@ -3,7 +3,10 @@
     id="benefits"
     class="w-full bg-white py-10 flex items-center justify-center"
   >
-    <div class="flex flex-col justify-center items-center w-full max-w-7xl p-3">
+    <div
+      class="flex flex-col justify-center items-center w-full max-w-7xl p-3"
+      ref="benefitsSection"
+    >
       <p
         class="px-4 py-2 rounded-full text-sm font-semibold bg-[#F7F7F8] text-btn_colors text-center"
       >
@@ -11,12 +14,16 @@
       </p>
 
       <h1
-        class="text-primary_txt_color font-sans font-semibold text-4xl md:text-6xl md:leading-[72px] text-center w-full md:w-2/3 my-4"
+        class="opacity-0 text-primary_txt_color font-sans font-semibold text-4xl md:text-6xl md:leading-[72px] text-center w-full md:w-2/3 my-4"
+        :class="{ 'animate-fade-in-delay': benefitsInView }"
       >
         Never Miss Anything <br />
         in Your Inbox
       </h1>
-      <p class="text-center font-[400] text-tertiary_txt_color md:w-2/3">
+      <p
+        class="opacity-0 text-center font-[400] text-tertiary_txt_color md:w-2/3"
+        :class="{ 'animate-fade-in-delay': benefitsInView }"
+      >
         Quick action on important emails can lead to faster problem-solving and
         decision-making. Making efficiently handling emails can free up time for
         other tasks.
@@ -24,7 +31,10 @@
       <div
         class="w-full grid grid-cols-1 md:grid-cols-7 my-10 gap-y-20 md:gap-x-20"
       >
-        <section class="col-span-3 text-tertiary_txt_color">
+        <section
+          class="opacity-0 col-span-3 text-tertiary_txt_color"
+          :class="{ 'animate-fade-in-delay': benefitsInView }"
+        >
           <div
             v-for="(card, index) in card_list"
             :key="card.name"
@@ -47,7 +57,8 @@
         </section>
 
         <section
-          class="py-14 rounded-xl bg-card_list_bg flex flex-col items-start col-span-4 border"
+          class="opacity-0 py-14 rounded-xl bg-card_list_bg flex flex-col items-start col-span-4 border"
+          :class="{ 'animate-fade-in-delay': benefitsInView }"
         >
           <div
             class="flex flex-col bg-card_list_bg/50 h-full w-full px-3 md:px-10 relative"
@@ -141,6 +152,9 @@ import arrow from "assets/icons/arrow.png";
 import clbg from "assets/images/clbg.png";
 import { ref, onMounted } from "vue";
 
+const benefitsSection = ref<HTMLElement | null>(null);
+const benefitsInView = ref(false); // State to track if the section is in view
+
 const card_list = ref([
   {
     key: "track_emails", // Unique key
@@ -228,6 +242,23 @@ const selectListItem = (index: number) => {
 // Initialize default selection when the component is mounted
 onMounted(() => {
   selectCard(0); // Select the first card by default
+
+  const observerOptions = {
+    threshold: 0.1, // Trigger when 10% of the section is in view
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.target === benefitsSection.value && entry.isIntersecting) {
+        benefitsInView.value = true; // Set to true when section is in view
+        observer.unobserve(entry.target); // Stop observing once in view
+      }
+    });
+  }, observerOptions);
+
+  if (benefitsSection.value) {
+    observer.observe(benefitsSection.value); // Start observing the section
+  }
 });
 </script>
 
