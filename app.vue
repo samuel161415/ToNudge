@@ -1,12 +1,12 @@
 
- <template>
-  <Header />
-  <Landing />
-  <HowItWorks />
-  <Benefits />
-  <Pricing />
-  <FAQ />
-  <Footer />
+<template>
+  <NuxtLayout>
+    <Landing />
+    <HowItWorks />
+    <Benefits />
+    <Pricing />
+    <FAQ />
+  </NuxtLayout>
 </template>
 
 <script setup lang="ts">

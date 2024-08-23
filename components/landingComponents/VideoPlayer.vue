@@ -1,13 +1,13 @@
 <template>
   <div class="relative w-full h-full">
-    <!-- Caption Image with Play Button -->
+
     <div
       v-if="!isPlaying"
       @click="openModal"
       class="relative max-h-[620px] cursor-pointer rounded-xl overflow-hidden"
     >
       <img
-        :src="captionImage"
+        :src="preview"
         alt="Video Caption"
         class="w-full h-full object-cover"
       />
@@ -26,26 +26,25 @@
       </div>
     </div>
 
-    <!-- Modal -->
     <div
       v-if="isPlaying"
-      class="fixed inset-0 z-50 flex items-center justify-center  bg-black bg-opacity-75"
+      class="fixed inset-0 z-50 w-full h-full flex items-center justify-center bg-black bg-opacity-75"
+      @click.self="closeModal"
     >
       <div
-        class="relative w-full h-full flex justify-center items-center max-w-7xl p-4"
+        class="relative w-full  border border-gray-500 rounded-xl flex justify-center items-center max-w-7xl p-4"
       >
-        <!-- Close Button -->
         <button
           @click="closeModal"
-          class="absolute top-4 right-4 text-white text-3xl z-50"
+          class="absolute top-[-5px] transform transition-all  hover:text-red-500 duration-300 ease-in-out right-2 text-white text-3xl z-50"
         >
           &times;
         </button>
-        <!-- Video Element -->
+
         <video
           ref="videoPlayer"
           :src="videoSrc"
-          class="w-full h-4/5 rounded-xl mt-5 z-40"
+          class="w-full h-4/5 rounded-xl mt-5 z-40 border border-gray-600"
           controls
           autoplay
         ></video>
@@ -57,28 +56,24 @@
 <script setup lang="ts">
 import { ref, nextTick } from "vue";
 import captionImage from "assets/images/caption.png";
+import preview from "assets/images/preview.png"
 import videoSrc from "assets/videos/landing_video.mp4";
 import playIcons from "assets/icons/playIcon.png";
 
 const isPlaying = ref(false);
+const videoPlayer = ref<HTMLVideoElement | null>(null);
 
-// Method to open the modal and play the video
 const openModal = () => {
   isPlaying.value = true;
-  // Disable background scrolling
   document.body.style.overflow = "hidden";
   nextTick(() => {
-    const videoElement = document.querySelector("video");
-    videoElement?.play();
+    videoPlayer.value?.play();
   });
 };
 
 // Method to close the modal
 const closeModal = () => {
-  console.log("yes close modal is clicked");
-
   isPlaying.value = false;
-  // Enable background scrolling
   document.body.style.overflow = "auto";
 };
 </script>
