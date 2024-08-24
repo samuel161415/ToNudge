@@ -21,25 +21,29 @@
         Optimize your Outlook
       </h2>
       <h1
-        class="opacity-0 text-primary_txt_color font-sans font-semibold text-5xl md:text-6xl  md:leading-[72px] text-center md:w-2/3 animate-slide-in-left"
+        class="opacity-0 text-primary_txt_color font-sans font-semibold text-5xl md:text-6xl md:leading-[72px] text-center md:w-2/3 animate-slide-in-left"
       >
         Make sure your important emails get answered
       </h1>
       <button
-        class="bg-white text-btn_colors py-3 px-4 rounded-lg flex justify-center items-center mt-8 mb-16 shadow-custom-blue animate-glow-slow transform transition-all duration-300 ease-in-out hover:scale-110 "
+        class="bg-white text-btn_colors py-3 px-4 rounded-lg flex justify-center items-center mt-8 mb-16 shadow-custom-blue animate-glow-slow transform transition-all duration-300 ease-in-out hover:scale-110"
         v-if="!showContactUs"
       >
         <span class="font-semibold mr-2">Install on</span>
         <img class=" " :src="img1" />
       </button>
-      <a
-        href="mailto:contact@tonudge.com"
-        class="bg-white text-btn_colors py-3 px-4 rounded-lg flex justify-center items-center mt-8 mb-16 shadow-custom-blue animate-glow-slow animate-slide-in-left transform transition-all duration-300 ease-in-out hover:scale-110"
-        v-if="showContactUs"
+      <button
+        class="transform transition-all duration-300 ease-in-out hover:scale-110 shadow-custom-blue animate-glow-slow mt-8 mb-16"
       >
-        <span class="font-semibold mr-2">Contact Us</span>
-        <img class=" " :src="img1" />
-      </a>
+        <a
+          href="mailto:contact@tonudge.com"
+          class="bg-white text-btn_colors py-3 px-4 rounded-lg flex justify-center items-center animate-slide-in-left"
+          v-if="showContactUs"
+        >
+          <span class="font-semibold mr-2">Contact Us</span>
+          <img class=" " :src="img1" />
+        </a>
+      </button>
       <!-- <img :src="temp_img" class="my-4" /> -->
       <VideoPlayer />
 
@@ -51,13 +55,13 @@
         <section
           class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-8 items-place-center justify-center my-4"
         >
-        <div
-        class="opacity-0 flex items-center justify-center"
-        v-for="(icon, index) in icons"
-        :key="icon.name"
-        :ref="(el) => (iconRefs[index] = el as HTMLElement)"
-        :class="{ 'animate-slide-in-left': inView[index] }"
-      >
+          <div
+            class="opacity-0 flex items-center justify-center"
+            v-for="(icon, index) in icons"
+            :key="icon.name"
+            :ref="(el) => (iconRefs[index] = el as HTMLElement)"
+            :class="{ 'animate-slide-in-left': inView[index] }"
+          >
             <img :src="icon.src" :alt="icon.name" />
           </div>
         </section>
@@ -109,7 +113,6 @@ const icons = [
   { name: "Icon 14", src: icon14 },
   { name: "Icon 15", src: icon15 },
 ];
-
 
 const iconRefs = ref<(Element | null)[]>([]); // Changed to Element to accommodate Vue's ref types
 const inView = ref<boolean[]>([]); // Boolean array to track if each icon is in view

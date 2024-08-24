@@ -14,12 +14,12 @@
       </section>
     </div>
     <div
-      class="w-full max-w-7xl mx-auto mt-10 flex justify-between items-center"
+      class="w-full max-w-7xl mx-auto mt-8 flex justify-between items-center"
     >
       <p>&copy; 2024 ToNudge. All rights reserved.</p>
-      <a href="#" target="_blank" class="flex justify-center items-center">
+      <a href="mailto:contact@tonudge.com" target="_blank" class="flex justify-center items-center">
         <img :src="mail" alt="mail" class="mr-2"/>
-        <p class="font-semibold">Contact: info@tonudge.com</p>
+        <p class="">Contact: info@tonudge.com</p>
       </a>
     </div>
   </footer>
