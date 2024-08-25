@@ -19,12 +19,9 @@
         <ul
           class="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-8 mt-4 lg:mt-0"
         >
-          <li>
-            <a href="#how-it-works" class="hover:text-primary">How it Works</a>
+          <li v-for="tab in tabs">
+            <a :href="tab.link" class="hover:text-primary">{{tab.name}}</a>
           </li>
-          <li><a href="#benefits" class="hover:text-primary">Benefits</a></li>
-          <!-- <li><a href="#pricing" class="hover:text-primary">Pricing</a></li> -->
-          <li><a href="#faq" class="hover:text-primary">FAQ</a></li>
         </ul>
       </nav>
 
@@ -112,6 +109,7 @@
 <script setup lang="ts">
 import menuIcon from "assets/icons/menu.png";
 import closeIcon from "assets/icons/close.png";
+import {tabs} from "assets/data"
 import { ref } from "vue";
 
 const showContactUs = ref(true);
