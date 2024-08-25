@@ -3,7 +3,9 @@
     id="how-it-works"
     class="flex items-center justify-center bg-white py-10"
   >
-    <div class="flex flex-col max-w-7xl justify-center items-center p-3">
+    <div class="opacity-0 flex flex-col max-w-7xl justify-center items-center p-3"
+    ref="htwSection"
+    :class="{ 'animate-fade-in-delay': htwInView }">
       <p
         class="px-4 py-2 rounded-full text-sm font-semibold bg-[#F7F7F8] text-btn_colors text-center"
       >
@@ -64,4 +66,25 @@ const cards = [
     desc: "You’ll get more time to spend on productivity because we help you to minimize the time spend ",
   },
 ];
+const htwSection = ref<HTMLElement | null>(null);
+const htwInView = ref(false);
+
+onMounted(() => {
+  const observerOptions = {
+    threshold: 0.1, // Trigger when 10% of the section is in view
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.target === htwSection.value && entry.isIntersecting) {
+        htwInView.value = true; // Set to true when section is in view
+        observer.unobserve(entry.target); // Stop observing once in view
+      }
+    });
+  }, observerOptions);
+
+  if (htwSection.value) {
+    observer.observe(htwSection.value); // Start observing the section
+  }
+});
 </script>
